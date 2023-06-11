@@ -3,14 +3,25 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 
+const users: User[] = [
+  {
+    id: 1,
+    email: 'rogerio410@gmail.com',
+    name: 'Rogério Silva',
+    password: '12365',
+  },
+];
+
 @Injectable()
 export class UsersService {
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+  create(request: CreateUserInput) {
+    const newUser = { ...request, id: 2 };
+    users.push(newUser);
+    return newUser;
   }
 
   findAll(): User[] {
-    return [];
+    return users;
   }
 
   findOne(id: number) {
