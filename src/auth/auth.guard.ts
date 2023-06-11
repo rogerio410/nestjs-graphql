@@ -25,11 +25,13 @@ export class AuthGuard implements CanActivate {
     if (isPublic) return true;
 
     // REST:
-    // const request = context.switchToHttp().getRequest();
+    let request = context.switchToHttp().getRequest();
 
     // GraphQL:
-    const ctx = GqlExecutionContext.create(context);
-    const { req: request } = ctx.getContext();
+    if (!request) {
+      const ctx = GqlExecutionContext.create(context);
+      request = ctx.getContext().req;
+    }
 
     const token = this.extractTokenFromHeader(request);
 
