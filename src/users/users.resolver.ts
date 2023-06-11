@@ -13,6 +13,8 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
+  // Now is Global Guard: @UseGuards(AuthGuard)
+  // @Public()
   @Query(() => [User], { name: 'users' })
   findAll() {
     return this.usersService.findAll();

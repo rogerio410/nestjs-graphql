@@ -28,6 +28,12 @@ export class UsersService {
     return findUser;
   }
 
+  async findOneByEmail(email: string) {
+    const findUser = await this.usersRepo.findOne({ where: { email } });
+    if (!findUser) throw new NotFoundException('User not found!');
+    return findUser;
+  }
+
   async update(id: number, updateUserInput: UpdateUserInput) {
     const findUser = await this.usersRepo.findOne({ where: { id } });
     if (!findUser) throw new NotFoundException('User not found!');
