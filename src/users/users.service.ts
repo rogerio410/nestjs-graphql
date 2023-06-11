@@ -5,15 +5,6 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 
-const users: User[] = [
-  {
-    id: 1,
-    email: 'rogerio410@gmail.com',
-    name: 'Rogério Silva',
-    password: '12365',
-  },
-];
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -26,7 +17,9 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return this.usersRepo.find();
+    return this.usersRepo.find({
+      // relations: ['expenses'],
+    });
   }
 
   async findOne(id: number) {

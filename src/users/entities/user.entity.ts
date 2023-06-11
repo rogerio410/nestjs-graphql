@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Expense } from '../../expenses/entities/expense.entity';
 
 @ObjectType()
 @Entity()
@@ -19,4 +20,10 @@ export class User {
   @Field()
   @Column()
   password: string;
+
+  @Field(() => [Expense], { defaultValue: [] })
+  @OneToMany(() => Expense, (expense) => expense.owner, {
+    lazy: true,
+  })
+  expenses: Expense[];
 }

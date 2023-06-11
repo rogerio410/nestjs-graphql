@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { ExpensesModule } from './expenses/expenses.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UsersModule } from './users/users.module';
       synchronize: false,
     }),
     UsersModule,
+    ExpensesModule,
   ],
   controllers: [],
   providers: [],
