@@ -1,16 +1,18 @@
 // import { User } from 'src/users/entities/user.entity';
+
 import { DataSource } from 'typeorm';
 
 export const appDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
-  port: 5430,
-  username: 'docker',
-  password: 'docker',
+  port: 5432,
+  username: 'postgres',
+  password: 'postgres',
   database: 'nestjs_graphql',
+  // entities: [User],
+  synchronize: false,
   entities: ['**/entities/*.entity.{js,ts}'],
   migrations: ['**/migrations/*.{js,ts}'],
-  synchronize: false,
 });
 
 appDataSource
