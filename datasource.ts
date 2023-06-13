@@ -1,16 +1,13 @@
 // import { User } from 'src/users/entities/user.entity';
+import { config as dotenvConfig } from 'dotenv';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import typeormConfig from './src/config/typeorm.config';
 
-import { DataSource } from 'typeorm';
+dotenvConfig({ debug: true });
+const config = typeormConfig().database as DataSourceOptions;
 
 export const appDataSource = new DataSource({
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'nestjs_graphql',
-  // entities: [User],
-  synchronize: false,
+  ...config,
   entities: ['**/entities/*.entity.{js,ts}'],
   migrations: ['**/migrations/*.{js,ts}'],
 });
